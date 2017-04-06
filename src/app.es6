@@ -5,7 +5,7 @@
 import 'bootstrapCss'
 import 'minireset.css'
 import './assets/lib/font-awesome/css/font-awesome.min.css'
-import './assets/css/common.less'
+import './assets/css/css.less'
 
 //引入入口tpl模板
 import template from './app.tpl'
@@ -16,6 +16,7 @@ import VueRouter from 'vue-router'
 
 //引入组件
 import pageNav from "./components/pageNav/pageNav.vue"
+import navBar from "./components/navBar/navBar.vue"
 
 // 引入组件
 import routes from './common/routes';
@@ -31,7 +32,17 @@ const router = new VueRouter({
 
 const app = new Vue({
     router,
+    data: {
+        navBar:[
+            {
+                name: '首页',
+                link: location.href + '/index'
+            }
+        ]
+    },
     components: {
-        'com-pagenav': pageNav
+       //vue自动把组件大写转化成‘-’
+        'com-pagenav': pageNav,//等价于‘comPagenav: pageNave’
+        'com-navbar': navBar
     }
 }).$mount('#app')

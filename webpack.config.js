@@ -6,7 +6,7 @@ let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let extractCSS = new ExtractTextPlugin('stylesheets/css.css',{
     allChunks: true
 });
-let extractLESS = new ExtractTextPlugin('stylesheets/less.css',{
+let extractLESS = new ExtractTextPlugin('stylesheets/css.css',{
     allChunks: true
 });
 
@@ -47,7 +47,7 @@ let config = {
             //.less 文件想要编译，scss就需要这些东西！来编译处理
             {
                 test: /\.less$/,
-                loader: extractCSS.extract('style', [
+                loader: extractCSS.extract('style',[
                     'css?importLoaders=1',
                     'postcss-loader?sourceMap=inline',
                     'less'
@@ -120,7 +120,7 @@ let config = {
         //自动生成html文件
         new HtmlWebpackPlugin({
             title: 'test',
-            template: '-!ejs!./src/app.tpl',
+            template: './src/app.tpl',
             filename: 'app.html',
             inject: true
         }),

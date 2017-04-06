@@ -10,13 +10,15 @@
 <body>
 
 <div id="app">
-    <h1>Hello App!</h1>
+    <div class="nav-container">
+        <com-navbar></com-navbar>
+    </div>
     <p>
         <!-- 使用 router-link 组件来导航. -->
         <!-- 通过传入 `to` 属性指定链接. -->
         <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
         <router-link to="/index">Go to index</router-link>
-        <com-pagenav></com-pagenav>
+
     </p>
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->

@@ -19,6 +19,7 @@
            </li>
            <li class="next" @click="toNext()"><a href="javascript:void(0)"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
        </ul>
+        <router-link :to="{ name:'index' }">Go to index</router-link>
     </div>
 </template>
 <style lang="less" scoped>
@@ -45,14 +46,14 @@
             return{
                 msg:'hello vue',
                 params: {
-                    count: 2,
+                    count: 15,
                     preEllipsis: true,
                     afterEllipsis: true,
                     first: [],
                     center: [],
                     last: [],
                     limit: 10,
-                    current: 96
+                    current: 3
                 }
             }
         },

@@ -7,7 +7,7 @@ import index from '../page/index';
 
 
 const routeMap = [
-    { path: '/index', component: index },
+    { name:'index', path: '/index', component: index },
 ];
 
 export default routeMap;
