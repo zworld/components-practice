@@ -6,3 +6,4 @@ explorations
 *.log
 .idea
 dist
+.happypack
