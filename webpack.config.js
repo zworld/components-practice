@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HappyPack = require('happypack');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let extractCSS = new ExtractTextPlugin('stylesheets/css.css',{
     allChunks: true
@@ -33,7 +34,7 @@ let config = {
             {
                 test: /\.(js|es6)$/,
                 exclude: /node_modules/,
-                loader: 'babel',
+                loader: 'happypack/loader'
             },
             // 编译css并自动添加css前缀
             {
@@ -84,12 +85,6 @@ let config = {
             require('autoprefixer')
         ];
     },
-    //babel需要提出来配置，因为有两处都将用到
-    babel: {
-        'presets': ['babel-preset-es2015','babel-preset-stage-2'],
-        'plugins': ['transform-runtime']
-
-    },
     // .vue的配置。需要单独出来配置
     vue: {
         loaders: {
@@ -105,7 +100,7 @@ let config = {
                     'less'
                 ].join('!')),
 
-            js: 'babel'
+            js: 'happypack/loader',
         }
     },
     resolve: {
@@ -129,7 +124,22 @@ let config = {
             filename: 'app.html',
             inject: true
         }),
-
+        
+        new HappyPack({
+            threads: 4,
+            loaders: [
+                {
+                    path: 'babel',
+                    query: {
+                        presets: ["es2015"],
+                        plugins: ["transform-runtime"],
+                        ignore: [
+                            "./src/js/directive/datePicker.js"
+                        ]
+                    }
+                }]
+        }),
+        
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
