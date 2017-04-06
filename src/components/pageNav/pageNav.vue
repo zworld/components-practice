@@ -45,7 +45,7 @@
             return{
                 msg:'hello vue',
                 params: {
-                    count: 100,
+                    count: 2,
                     preEllipsis: true,
                     afterEllipsis: true,
                     first: [],
