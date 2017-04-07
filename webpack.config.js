@@ -142,7 +142,8 @@ let config = {
         
         new webpack.ProvidePlugin({
             $: "jquery",
-            jQuery: "jquery"
+            jQuery: "jquery",
+            Vue: 'vue'
         }),
 
         //提取CSS，LESS

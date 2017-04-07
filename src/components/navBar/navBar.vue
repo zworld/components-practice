@@ -3,15 +3,27 @@
       <div class="logo">
           <img src="../../assets/images/test.png">
       </div>
-      <div class="search">
-          <input type="text">
+      <div class="search" @click.stop>
+          <input type="text" @focus="show.searchList=true">
           <i class="fa fa-search" aria-hidden="true"></i>
-          <div class="list"></div>
+          <transition name="list-toggle">
+              <div class="list"  v-show="show.searchList">
+                  <ul style="text-align: center">
+                      <li>test</li>
+                      <li>test</li>
+                      <li>test</li>
+                      <li>test</li>
+                      <li>test</li>
+                      <li>test</li>
+                  </ul>
+              </div>
+         </transition>
       </div>
       <div class="nav-content">
           <ul>
               <li v-for="navItem in navBar">
-                  <router-link :to="{ name: navItem.linkName}" class="checked">{{ navItem.name }}</router-link>
+                  <router-link :to="{ name: navItem.name}" :class="{ checked: navChecked[navItem.name] }" v-if="navItem.isRouterLink">{{ navItem.title}}</router-link>
+                  <a :href="navItem.link" v-else>{{ navItem.name}}</a>
               </li>
           </ul>
       </div>
@@ -99,11 +111,41 @@
                 }
             }
             .list{
-                display: none;
+                ul{
+                    position: relative;
+                    top: -5px;
+                    &:before{
+                        content: '';
+                        width: 0;
+                        height: 0;
+                        border-width: 0 10px 10px 10px;
+                        border-style: solid;
+                        border-color: transparent transparent #191919 transparent;
+                        position: absolute;
+                        top: -9px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                    }
+                }
+                li{
+                    background: #191919;
+                    height: 30px;
+                    line-height: 30px;
+                    border-top: 1px solid #202020;
+                    border-bottom: 1px solid #0c0c0c;
+                }
+
             }
         }
     }
-
+    .list-toggle-enter-active,.list-toggle-leave-active {
+        transition: all .3s ease;
+    }
+    .list-toggle-enter, .list-toggle-leave-active {
+        transform: translateY(-100%);
+        opacity: 0;
+        height: 0;
+    }
 </style>
 <script>
     export default {
@@ -111,20 +153,55 @@
             return{
                navBar:[
                    {
-                       name: '首页',
+                       name: 'index',
+                       title: '首页',
                        link: './index',
-                       linkName: 'index'
+                       isRouterLink: true,
                    }
-               ]
+               ],
+                show:{
+                    searchList: false
+                }
             }
         },
         methods: {
+
+            setFalse: function (obj) {
+
+                for(let key in obj){
+                    if(obj.key instanceof Object){
+                        arguments.callee(obj[key])
+                    }else{
+                        obj[key] = false
+                    }
+
+                }
+            }
         },
         created() {
 
         },
         mounted() {
-        }
+            var vm  = this,
+                body = document.querySelector('body');
 
+            body.addEventListener('click',function(){
+
+                vm.setFalse(vm.show)
+
+            })
+        },
+        computed: {
+            'navChecked': function(){
+                if(!this.$route.name){
+                    return {
+                        'index': true
+                    }
+                }
+                return  {
+                    [this.$route.name]: true
+                }
+            }
+        }
     }
 </script>
