@@ -41,6 +41,11 @@ const app = new Vue({
             }
         ]
     },
+    methods: {
+        Getmsg: function (msg) {
+            console.log(msg)
+        }
+    },
     components: {
        //vue自动把组件大写转化成‘-’
         'com-pagenav': pageNav,//等价于‘comPagenav: pageNave’
