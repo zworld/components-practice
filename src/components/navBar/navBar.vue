@@ -6,18 +6,13 @@
       <div class="search" @click.stop>
           <input type="text" @focus="show.searchList=true">
           <i class="fa fa-search" aria-hidden="true"></i>
-          <transition name="list-toggle">
-              <div class="list"  v-show="show.searchList">
-                  <ul style="text-align: center">
-                      <li>test</li>
-                      <li>test</li>
-                      <li>test</li>
-                      <li>test</li>
-                      <li>test</li>
-                      <li>test</li>
+              <div class="list animated">
+                  <ul>
+                      <transition name="list-toggle" v-for="n in 5">
+                         <li v-show="show.searchList" class="animated" :class="{['enter-delay-'+ n]: show.searchList,['leave-delay-'+ n]: !show.searchList}" >test</li>
+                      </transition>
                   </ul>
               </div>
-         </transition>
       </div>
       <div class="nav-content">
           <ul>
@@ -114,18 +109,19 @@
                 ul{
                     position: relative;
                     top: -5px;
-                    &:before{
-                        content: '';
-                        width: 0;
-                        height: 0;
-                        border-width: 0 10px 10px 10px;
-                        border-style: solid;
-                        border-color: transparent transparent #191919 transparent;
-                        position: absolute;
-                        top: -9px;
-                        left: 50%;
-                        transform: translateX(-50%);
-                    }
+                    text-align: center;
+                    /*&:before{*/
+                        /*content: '';*/
+                        /*width: 0;*/
+                        /*height: 0;*/
+                        /*border-width: 0 10px 10px 10px;*/
+                        /*border-style: solid;*/
+                        /*border-color: transparent transparent #191919 transparent;*/
+                        /*position: absolute;*/
+                        /*top: -9px;*/
+                        /*left: 50%;*/
+                        /*transform: translateX(-50%);*/
+                    /*}*/
                 }
                 li{
                     background: #191919;
@@ -138,13 +134,29 @@
             }
         }
     }
-    .list-toggle-enter-active,.list-toggle-leave-active {
-        transition: all .3s ease;
+    .generate-enter-delay(5);
+    .generate-enter-delay(@n,@i: 1) when(@i=<@n){
+        .enter-delay-@{i} {
+            animation-delay: (0.1s * @i);
+        }
+        .generate-enter-delay(@n,(@i + 1))
     }
-    .list-toggle-enter, .list-toggle-leave-active {
-        transform: translateY(-100%);
-        opacity: 0;
-        height: 0;
+    .generate-enter-delay(5);
+    .generate-enter-delay(@n,@i: 1) when(@i=<@n){
+        .enter-delay-@{i} {
+            animation-delay: (0.1s * @i);
+        }
+        .leave-delay-@{i}{
+            animation-delay: (0.1s * (@n - @i));
+        }
+        .generate-enter-delay(@n,(@i + 1))
+    }
+
+    .list-toggle-enter-active{
+        animation-name: flipInY;
+    }
+    .list-toggle-leave-active{
+        animation-name: flipOutY;
     }
 </style>
 <script>

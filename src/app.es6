@@ -4,6 +4,7 @@
 //引入全局css
 import 'bootstrapCss'
 import 'minireset.css'
+import 'animate.css'
 import './assets/lib/font-awesome/css/font-awesome.min.css'
 import './assets/css/css.less'
 
