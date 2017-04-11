@@ -11,7 +11,7 @@
 
 <div id="app">
     <div class="nav-container">
-        <com-navbar @msg-from-nav="Getmsg(msg)"></com-navbar>
+        <com-navbar @msg-from-nav="Getmsg"></com-navbar>
     </div>
     <p>
         <!-- 使用 router-link 组件来导航. -->

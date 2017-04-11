@@ -131,7 +131,7 @@ let config = {
                 {
                     path: 'babel',
                     query: {
-                        presets: ["es2015"],
+                        presets: ["es2015","stage-2"],
                         plugins: ["transform-runtime"],
                         ignore: [
                             "./src/js/directive/datePicker.js"
@@ -143,7 +143,8 @@ let config = {
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
-            Vue: 'vue'
+            Vue: 'vue',
+            Vuex: 'vuex'
         }),
 
         //提取CSS，LESS

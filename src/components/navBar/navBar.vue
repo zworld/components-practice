@@ -1,9 +1,9 @@
 <template>
-  <div class="nav" @click="msgToParent">
-      <div class="logo">
+    <div class="nav" @click="msgToParent()">
+        <div class="logo">
           <img src="../../assets/images/test.png">
       </div>
-      <div class="search" @click.stop>
+        <div class="search" @click.stop>
           <input type="text" @focus="show.searchList=true">
           <i class="fa fa-search" aria-hidden="true"></i>
               <div class="list animated">
@@ -14,7 +14,7 @@
                   </ul>
               </div>
       </div>
-      <div class="nav-content">
+        <div class="nav-content">
           <ul>
               <li v-for="navItem in navBar">
                   <router-link :to="{ name: navItem.name}" :class="{ checked: navChecked[navItem.name] }" v-if="navItem.isRouterLink">{{ navItem.title}}</router-link>
@@ -24,7 +24,7 @@
                           <div class="list animated" >
                               <ul>
                                   <transition name="list-toggle" v-for="n in 5">
-                                    <li v-show="show.navContent[navItem.name]" class="animated" :class="{['enter-delay-'+ n]: show.searchList,['leave-delay-'+ n]: !show.searchList}">test</li>
+                                    <li v-show="show.navContent[navItem.name]" class="animated" :class="{['enter-delay-'+ n]: show.navContent[navItem.name],['leave-delay-'+ n]: !show.navContent[navItem.name]}">test</li>
                                   </transition>
                               </ul>
                           </div>
@@ -34,12 +34,16 @@
               </li>
           </ul>
       </div>
-  </div>
+        <div class="vuexShow" style="position: absolute;top:80px;color: red">
+            vuex测试:{{ count }}--{{ evenOrOdd }}
+        </div>
+     </div>
 </template>
 <style lang="less">
 @import './style.less';
 </style>
 <script>
+    import { mapState,mapGetters } from 'vuex'
     export default {
         data() {
             return{
@@ -84,14 +88,14 @@
             },
 
             msgToParent: function () {
-                console.log('1111')
 
                 this.$emit('msg-from-nav','test')
 
             }
         },
         created() {
-
+            let a = [1,23]
+            console.log([...a])
         },
         mounted() {
             var vm  = this,
@@ -99,12 +103,13 @@
 
             body.addEventListener('click',function(){
 
+                vm.$store.commit('increment',1)
                 vm.setFalse(vm.show)
 
             })
         },
         computed: {
-            'navChecked': function(){
+            navChecked: function(){
                 if(!this.$route.name){
                     return {
                         'index': true
@@ -113,7 +118,14 @@
                 return  {
                     [this.$route.name]: true
                 }
-            }
+            },
+//            count(){return this.$store.state.count}
+            ...mapState({
+                count: state=> state.count
+            }),
+            ...mapGetters([
+                'evenOrOdd'
+            ])
         }
     }
 </script>

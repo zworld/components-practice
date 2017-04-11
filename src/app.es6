@@ -12,7 +12,6 @@ import './assets/css/css.less'
 import template from './app.tpl'
 
 //引入vue相关组件
-import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 //引入组件
@@ -21,7 +20,7 @@ import navBar from "./components/navBar/navBar.vue"
 
 // 引入组件
 import routes from './common/routes';
-
+import store from './common/vuex/store'
 
 Vue.use(VueRouter);
 
@@ -33,6 +32,7 @@ const router = new VueRouter({
 
 const app = new Vue({
     router,
+    store,
     data: {
         navBar:[
             {
@@ -43,7 +43,9 @@ const app = new Vue({
     },
     methods: {
         Getmsg: function (msg) {
+
             console.log(msg)
+
         }
     },
     components: {
