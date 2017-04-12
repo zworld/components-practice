@@ -8,6 +8,8 @@ import 'animate.css'
 import './assets/lib/font-awesome/css/font-awesome.min.css'
 import './assets/css/css.less'
 
+//引入全局js
+import 'bootstrap'
 //引入入口tpl模板
 import template from './app.tpl'
 
@@ -21,7 +23,8 @@ import navBar from "./components/navBar/navBar.vue"
 // 引入组件
 import routes from './common/routes';
 import store from './common/vuex/store'
-
+import myDirective from './common/plugins/myDirective'
+Vue.use(myDirective);
 Vue.use(VueRouter);
 
 const router = new VueRouter({

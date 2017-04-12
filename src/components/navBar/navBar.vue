@@ -70,7 +70,8 @@
                     navContent:{
                         expand: false
                     }
-                }
+                },
+                test: 'test'
             }
         },
         methods: {
@@ -94,8 +95,6 @@
             }
         },
         created() {
-            let a = [1,23]
-            console.log([...a])
         },
         mounted() {
             var vm  = this,
