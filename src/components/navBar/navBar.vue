@@ -34,9 +34,6 @@
               </li>
           </ul>
       </div>
-        <div class="vuexShow" style="position: absolute;top:80px;color: red">
-            vuex测试:{{ count }}--{{ evenOrOdd }}
-        </div>
      </div>
 </template>
 <style lang="less">

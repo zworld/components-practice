@@ -55,7 +55,7 @@ let config = {
             },
             // 图片转化，小于8K自动转化为base64的编码
             {
-                test: /\.(png|jpg|gif|svg)$/,
+                test: /\.(png|jpg|gif|svg|webp)$/,
                 loader: 'url-loader',
                 query: {
                     limit: 1,

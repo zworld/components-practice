@@ -1,6 +1,6 @@
 <script>
    import tpl from './index.tpl';
-
+   import Swipe from 'swipejs'
     export default {
 
         template: tpl,
@@ -20,13 +20,12 @@
         },
 
         created () {
-
+            console.log(Swipe)
         },
 
-        ready (){
-
+        mounted(){
+            this.mySwipe = Swipe(document.getElementById('slider'));
         },
-
         computed: {
 
         }

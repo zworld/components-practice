@@ -21,13 +21,14 @@ myDirective.install = function (Vue, options) {
 }
 
 //导出模块
-if (typeof exports == "object") {
-    module.exports = myDirective
-// 支持 AMD
-} else if (typeof define == "function" && define.amd) {
-    define([], function(){ return myDirective })
-// Vue 是全局变量时，自动调用 Vue.use()
-} else if (window.Vue) {
-    window.VueTouch = myDirective
-    Vue.use(myDirective)
-}
+// if (typeof exports == "object") {
+//     module.exports = myDirective
+// // 支持 AMD
+// } else if (typeof define == "function" && define.amd) {
+//     define([], function(){ return myDirective })
+// // Vue 是全局变量时，自动调用 Vue.use()
+// } else if (window.Vue) {
+//     window.VueTouch = myDirective
+//     Vue.use(myDirective)
+// }
+export default myDirective
